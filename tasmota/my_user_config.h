@@ -604,7 +604,7 @@
 #define USE_COUNTER                              // Enable inputs as counter (+0k8 code)
 
 // -- Internal Analog input -----------------------
-//#define USE_ADC_VCC                              // Display Vcc in Power status. Disable for use as Analog input on selected devices
+#define USE_ADC_VCC                              // Display Vcc in Power status. Disable for use as Analog input on selected devices
 
 // -- One wire sensors ----------------------------
 #define USE_DS18x20                              // Add support for DS18x20 sensors with id sort, single scan and read retry (+2k6 code)
@@ -1052,7 +1052,7 @@
   #define USE_ZIGBEE_MAXTIME_LIFT           4*60*60   // 4h
 
 // -- Matter support (ESP32 and variants) ----------------------------
-#define MATTER_ENABLED    false                    // [SetOption151] Is Matter enabled by default
+// #define MATTER_ENABLED    false                    // [SetOption151] Is Matter enabled by default
 
 // -- Other sensors/drivers -----------------------
 
@@ -1145,9 +1145,10 @@
  * ESP32 only features
 \*********************************************************************************************/
 
-#ifdef ESP32
 #define JPEG_PICTS      //ALDIY
 #define USE_UFILESYS    //ALDIY
+#ifdef ESP32
+
 //#define USE_ESP32_WDT                            // Enable Watchdog for ESP32, trigger a restart if loop has not responded for 5s, and if `yield();` was not called
 
 #define SET_ESP32_STACK_SIZE  (8 * 1024)         // Set the stack size for Tasmota. The default value is 8192 for Arduino, some builds might need to increase it
