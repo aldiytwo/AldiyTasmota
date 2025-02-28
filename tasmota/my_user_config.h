@@ -491,7 +491,7 @@
   #define WEB_USERNAME         "admin"           // Web server Admin mode user name
 //  #define DISABLE_REFERER_CHK                     // [SetOption128] Disable HTTP API
   #define USE_ENHANCED_GUI_WIFI_SCAN             // Enable Wi-Fi scan output with BSSID (+0k5 code)
-//  #define USE_WEBSEND_RESPONSE                   // Enable command WebSend response message (+1k code)
+  #define USE_WEBSEND_RESPONSE                   // ALDIY Enable command WebSend response message (+1k code)
 //  #define USE_WEBGETCONFIG                       // Enable restoring config from external webserver (+0k6)
 //  #define USE_WEBRUN                             // Enable executing a tasmota command file from external web server (+0.4 code)
 //  #define USE_GPIO_VIEWER                        // Enable GPIO Viewer to see realtime GPIO states (+6k code)
@@ -512,7 +512,7 @@
     #define SUNRISE_DAWN_ANGLE DAWN_NORMAL       // Select desired Dawn Angle from (DAWN_NORMAL, DAWN_CIVIL, DAWN_NAUTIC, DAWN_ASTRONOMIC)
 
 // -- Ping ----------------------------------------
-//  #define USE_PING                                 // Enable Ping command (+2k code)
+  #define USE_PING                                 // ALDIY Enable Ping command (+2k code)
 
 // -- Compression ---------------------------------
 #define USE_UNISHOX_COMPRESSION                  // Add support for string compression in Rules or Scripts
@@ -523,13 +523,25 @@
   #define SUPPORT_MQTT_EVENT                     // Support trigger event with MQTT subscriptions (+1k8 code)
   #define USE_EXPRESSION                         // Add support for expression evaluation in rules (+1k7 code)
     #define SUPPORT_IF_STATEMENT                 // Add support for IF statement in rules (+2k7)
-//  #define USER_RULE1 "<Any rule1 data>"          // Add rule1 data saved at initial firmware load or when command reset is executed
-//  #define USER_RULE2 "<Any rule2 data>"          // Add rule2 data saved at initial firmware load or when command reset is executed
+ #define USER_RULE1 "<ON IrReceived#Data=0x00F7807F DO Backlog Power1 OFF ; DisplayText[s1z] %value% leds off ; publish note33/samvoice leds off ;publish stat/TAS11/aldiy 0 ENDON
+ON IrReceived#Data=0x00F700FF DO Backlog Power1 ON  ; DisplayText[s1z] %value% leds on  ; publish note33/samvoice leds on  ;publish stat/TAS11/aldiy 1 ENDON
+ON IrReceived#Data=0x00F740BF DO Backlog Power2 OFF ; DisplayText[s1z] %value% Tlcd off ; publish note33/samvoice Tlcd off ;publish stat/TAS11/aldiy 2 ENDON
+ON IrReceived#Data=0x00F7C03F DO Backlog Power2 ON  ; DisplayText[s1z] %value% Tlcd on  ; publish note33/samvoice Tlcd on  ;publish stat/TAS11/aldiy 3 ENDON
+ON IrReceived#Data=0x00F720DF DO Backlog COLOR 330000 ; DisplayText[z] red   ; publish note33/samvoice red ; publish stat/TAS11/aldiy 4 ENDON
+ON IrReceived#Data=0x00F7A05F DO Backlog COLOR 003300 ; DisplayText[z] green ; publish note33/samvoice green ; publish stat/TAS11/aldiy 5  ENDON
+ON IrReceived#Data=0x00F7609F DO Backlog COLOR 000033 ; displaytext[zs1l3c1tS] blue ; publish note33/samvoice blue  ; publish stat/TAS11/aldiy 6 ENDON>"          // ALDIY Add rule1 data saved at initial firmware load or when command reset is executed
+#define USER_RULE2 "<ON IrReceived#Data=0x00F710EF DO Backlog Ping4 10.0.6.33 ; COLOR 4D0B00 ; DisplayText[z] pinging 6.33  ; publish stat/TAS11/aldiy 7  ENDON
+ON Ping#10.0.6.33#Success==0 DO backlog DisplayText[z] 6.33 is dead ;COLOR 330000 ENDON
+ON Ping#10.0.6.33#Success>0  DO backlog DisplayText[z] 6.33 is live  ;COLOR 003300  ENDON 
+ON IrReceived#Data=0x00F7E01F DO Backlog COLOR 333333 ; displaytext[zs1l3c1] white ; publish note33/samvoice white  ; publish stat/TAS11/aldiy 8 ENDON
+ON IrReceived#Data=0x00F7D02F DO Backlog dimmer +10 ; publish stat/TAS11/aldiy 9  ENDON
+ON IrReceived#Data=0x00F7F00F DO Backlog dimmer -10 ; publish stat/TAS11/aldiy 10   ENDON
+ON dimmer#State  DO Backlog displaytext[zs1l3c1] dimmer %value%  ; publish note33/samvoice dimmer %value%  ENDON>"          // ALDIY  Add rule2 data saved at initial firmware load or when command reset is executed
 //  #define USER_RULE3 "<Any rule3 data>"          // Add rule3 data saved at initial firmware load or when command reset is executed
 
-//#define USE_SCRIPT                               // Add support for script (+36k code, +1k mem)
-//  #define USE_SCRIPT_FATFS 4                     // Script: Add FAT FileSystem Support
-//  #define SUPPORT_MQTT_EVENT                     // Support trigger event with MQTT subscriptions (+3k5 code)
+#define USE_SCRIPT                               // ALDIY Add support for script (+36k code, +1k mem)
+#define USE_SCRIPT_FATFS 4                     //  ALDIY Script: Add FAT FileSystem Support
+#define SUPPORT_MQTT_EVENT                     // ALDIY Support trigger event with MQTT subscriptions (+3k5 code)
 
 //#define USER_BACKLOG "<Any command separated by a semicolon (;)>"  // Add commands executed at firmware load or when command reset is executed
 
@@ -631,7 +643,7 @@
 //  #define USE_ADS1115                            // [I2cDriver13] Enable ADS1115 16 bit A/D converter (I2C address 0x48, 0x49, 0x4A or 0x4B) based on Adafruit ADS1x15 library (no library needed) (+0k7 code)
 //  #define USE_INA219                             // [I2cDriver14] Enable INA219 (I2C address 0x40, 0x41 0x44 or 0x45) Low voltage and current sensor (+1k code)
   //  #define INA219_SHUNT_RESISTOR (0.100)        // 0.1 Ohm default shunt resistor, can be overriden in user_config_override or using Sensor13
-//  #define USE_INA226                             // [I2cDriver35] Enable INA226 (I2C address 0x40, 0x41 0x44 or 0x45) Low voltage and current sensor (+2k3 code)
+  #define USE_INA226                             // ALDIY  [I2cDriver35] Enable INA226 (I2C address 0x40, 0x41 0x44 or 0x45) Low voltage and current sensor (+2k3 code)
 //  #define USE_SHT3X                              // [I2cDriver15] Enable SHT3x (I2C address 0x44 or 0x45) or SHTC3 (I2C address 0x70) sensor (+0k7 code)
 //  #define USE_TSL2561                            // [I2cDriver16] Enable TSL2561 sensor (I2C address 0x29, 0x39 or 0x49) using library Joba_Tsl2561 (+2k3 code)
 //  #define USE_TSL2591                            // [I2cDriver40] Enable TSL2591 sensor (I2C address 0x29) using library Adafruit_TSL2591 (+1k6 code)
@@ -816,7 +828,7 @@
 //    #define USE_IOTTIMER                         // Enable TM1640 based IotTimer
 
 // -- Universal Display Driver ---------------------------------
-// #define USE_UNIVERSAL_DISPLAY                   // New universal display driver for both I2C and SPI
+  #define USE_UNIVERSAL_DISPLAY                   //ALDIY New universal display driver for both I2C and SPI
     #define MAX_TOUCH_BUTTONS 16                 // Virtual touch buttons
 
 // -- SPI sensors ---------------------------------
@@ -825,7 +837,7 @@
 #ifdef USE_SPI
 //  #define USE_NRF24                              // Add SPI support for NRF24L01(+) (+2k6 code)
     #define USE_MIBLE                            // BLE-bridge for some Mijia-BLE-sensors (+4k7 code)
-//  #define USE_DISPLAY                            // Add SPI Display support for 320x240 and 480x320 TFT
+  #define USE_DISPLAY                            // ALDIY Add SPI Display support for 320x240 and 480x320 TFT
     // REMOVED -- #define USE_DISPLAY_ILI9341                  // [DisplayModel 4] Enable ILI9341 Tft 480x320 display (+19k code)
 //    #define USE_DISPLAY_EPAPER_29                // [DisplayModel 5] Enable e-paper 2.9 inch display (+19k code)
 //    #define USE_DISPLAY_EPAPER_42                // [DisplayModel 6] Enable e-paper 4.2 inch display
@@ -1197,7 +1209,7 @@
   #define USE_BERRY_PSRAM                        // Allocate Berry memory in PSRAM if PSRAM is connected - this might be slightly slower but leaves main memory intact
   #define USE_BERRY_IRAM                         // Allocate some data structures in IRAM (which is ususally unused) when possible and if no PSRAM is available
   #define USE_BERRY_FAST_LOOP_SLEEP_MS  5        // Minimum time in milliseconds to before calling again `tasmota.fast_loop()`, a smaller value will consume more CPU (min 1ms)
-  // #define USE_BERRY_DEBUG                        // Compile Berry bytecode with line number information, makes exceptions easier to debug. Adds +8% of memory consumption for compiled code
+  #define USE_BERRY_DEBUG                        // ALDIY Compile Berry bytecode with line number information, makes exceptions easier to debug. Adds +8% of memory consumption for compiled code
   //   #define UBE_BERRY_DEBUG_GC                   // Print low-level GC metrics
   // #define USE_BERRY_INT64                        // Add 64 bits integer support (+1.7KB Flash)
   #define USE_WEBCLIENT                          // Enable `webclient` to make HTTP/HTTPS requests. Can be disabled for security reasons.
@@ -1231,6 +1243,8 @@
 
 // -- LVGL Graphics Library ---------------------------------
 //#define USE_LVGL                                 // LVGL Engine, requires Berry (+382KB)
+  #define JPEG_PICTS                     // ALDIY
+  #define USE_UFILESYS                   // ALDIY
   #define USE_LVGL_PSRAM                         // Allocate LVGL memory in PSRAM if PSRAM is connected - this might be slightly slower but leaves main memory intact
   #define USE_LVGL_HASPMOTA                      // Enable OpenHASP compatiblity and Robotocondensed fonts (+90KB flash)
   #define USE_LVGL_MAX_SLEEP  10                 // max sleep in ms when LVGL is enabled, more than 10ms will make display less responsive
