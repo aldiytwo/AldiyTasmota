@@ -1052,7 +1052,7 @@
   #define USE_ZIGBEE_MAXTIME_LIFT           4*60*60   // 4h
 
 // -- Matter support (ESP32 and variants) ----------------------------
-// #define MATTER_ENABLED    false                    // [SetOption151] Is Matter enabled by default
+ #define MATTER_ENABLED    false                    // [SetOption151] Is Matter enabled by default
 
 // -- Other sensors/drivers -----------------------
 
@@ -1145,10 +1145,9 @@
  * ESP32 only features
 \*********************************************************************************************/
 
+#ifdef ESP32
 #define JPEG_PICTS      //ALDIY
 #define USE_UFILESYS    //ALDIY
-#ifdef ESP32
-
 //#define USE_ESP32_WDT                            // Enable Watchdog for ESP32, trigger a restart if loop has not responded for 5s, and if `yield();` was not called
 
 #define SET_ESP32_STACK_SIZE  (8 * 1024)         // Set the stack size for Tasmota. The default value is 8192 for Arduino, some builds might need to increase it
@@ -1292,7 +1291,7 @@
     // #define BE_LV_WIDGET_TILEVIEW
 
 // -- Matter protocol ---------------------------------
-  // #define USE_MATTER_DEVICE                      // Enable Matter device support (+380KB)
+ #define USE_MATTER_DEVICE                      // Enable Matter device support (+380KB)
                                                     // Enabled by default in standard ESP32 binary
 
 #endif  // ESP32
@@ -1301,7 +1300,7 @@
  * Debug features
 \*********************************************************************************************/
 
-//#define DEBUG_TASMOTA_CORE                       // Enable core debug messages
+#define DEBUG_TASMOTA_CORE                       // Enable core debug messages
 //#define DEBUG_TASMOTA_DRIVER                     // Enable driver debug messages
 //#define DEBUG_TASMOTA_SENSOR                     // Enable sensor debug messages
 //#define USE_DEBUG_DRIVER                         // Use xdrv_99_debug.ino providing commands CpuChk, CfgXor, CfgDump, CfgPeek and CfgPoke
